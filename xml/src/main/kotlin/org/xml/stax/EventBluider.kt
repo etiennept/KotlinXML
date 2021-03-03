@@ -16,7 +16,7 @@ object EventBluider {
     fun createStartElement (string: String? , string1: String ? , string2  : String  ) = event.createStartElement(string , "" , "")!!
    fun createStartElement( name :  QName) = event.createStartElement(name  ,  null , null )!!
    fun createEndElement( name :QName) = event.createEndElement(name , null  , )!!
-
+    fun createEndDocument() = event.createEndDocument()!!
     fun createEndElement( string : String? ,string1: String?, string2: String ) = event.createEndElement( string,string1 ,string2 )!!
     fun createCharacters(string: String) = event.createCharacters(string)!!
 }

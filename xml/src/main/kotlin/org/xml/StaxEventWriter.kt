@@ -4,9 +4,11 @@ import org.xml.stax.EventBluider
 import javax.xml.namespace.QName
 import javax.xml.stream.XMLEventWriter
 
-class StaxEventDocumentWriter internal constructor(private val writer: XMLEventWriter) : DocumentWriter {
+class StaxEventDocumentWriter internal constructor( private val writer: XMLEventWriter ,version : String  , encoding : String ) : DocumentWriter {
     private val bool = true
-
+    init {
+        writer.add( EventBluider.createStartDocument(encoding , version ) )
+    }
     override fun element(name: String, vararg attributes: Pair<String, String>, children: ElementWriter.() -> Unit) =
         if (bool) {
             writer.element(name, attributes, children)
@@ -16,6 +18,7 @@ class StaxEventDocumentWriter internal constructor(private val writer: XMLEventW
 
     fun close() = if (bool) throw Exception()
     else writer.run {
+        writer.add( EventBluider.createEndDocument())
         flush()
         close()
     }
@@ -50,3 +53,6 @@ private fun XMLEventWriter.element(
 
 private fun XMLEventWriter.comment(comment: String) =
     add(EventBluider.createComment(comment))
+
+
+fun XMLEventWriter.write ( version: String , encoding: String , run : DocumentWriter.() -> Unit ) = StaxEventDocumentWriter(this  , version , encoding ).apply(run).close()

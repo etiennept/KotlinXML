@@ -4,7 +4,7 @@ import javax.xml.stream.XMLStreamWriter
 import kotlin.Exception
 
 
-class StaxStreamDocumentWriter internal constructor(private val writer: XMLStreamWriter ,  encoding: String , version :String  ) : DocumentWriter {
+class StaxStreamDocumentWriter internal constructor(private val writer: XMLStreamWriter ,  version :String  , encoding: String ) : DocumentWriter {
     init {
         writer.writeStartElement(encoding , version)
     }
@@ -62,7 +62,7 @@ internal fun XMLStreamWriter.attribute(attributes: Array<out Pair<String, String
 
     }
 }
-
+fun  XMLStreamWriter.write(version: String  , encoding: String , run : DocumentWriter.()  -> Unit  ) =  StaxStreamDocumentWriter( this  , version , encoding ).apply(run).close()
 
 
 

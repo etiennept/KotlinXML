@@ -10,4 +10,5 @@ object XMLOutputBuilder {
     fun createXMLStreamWriter(outputStream: OutputStream) = output.createXMLStreamWriter( outputStream)!!
     fun createXMLEventWriter(writer: Writer ) = output.createXMLEventWriter(writer)!!
     fun createXMLEventWriter(outputStream: OutputStream)  = output.createXMLEventWriter(outputStream )!!
+
 }

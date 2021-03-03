@@ -22,7 +22,7 @@ class StaxAttributes( private val  attribute : Map<String , String>   ) : Attrib
 
 }
 
-fun <T> XMLStreamReader.read(run : ElementReader<T>.() -> T  ): T? {
+internal fun <T> XMLStreamReader.read(run : ElementReader<T>.() -> T  ): T {
     val stuck = mutableListOf<StaxElementReader<T>>()
     var value  : T? = null
     while (hasNext()) {
@@ -51,7 +51,7 @@ fun <T> XMLStreamReader.read(run : ElementReader<T>.() -> T  ): T? {
     return value!!
 }
 
-fun <T> XMLEventReader.read(run : ElementReader<T>.() -> T ) : T {
+internal fun <T> XMLEventReader.read(run : ElementReader<T>.() -> T ) : T {
     val stuck = mutableListOf<StaxElementReader<T>>()
     var value  : T? = null
     while (hasNext()) {
@@ -88,7 +88,7 @@ fun <T> XMLEventReader.read(run : ElementReader<T>.() -> T ) : T {
     return value!!
 }
 
-fun StartElement.attribute() = attributes.run {
+private fun StartElement.attribute() = attributes.run {
     val attribute = mutableMapOf<String, String>()
     while (hasNext()) {
         this.next().run {
