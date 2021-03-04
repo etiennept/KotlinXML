@@ -26,6 +26,7 @@ internal fun <T> XMLStreamReader.read(run : ElementReader<T>.() -> T  ): T {
     val stuck = mutableListOf<StaxElementReader<T>>()
     var value  : T? = null
     while (hasNext()) {
+        next()
         when {
             isStartElement -> {
                 val attribute = mutableMapOf<String, String>()
@@ -57,8 +58,9 @@ internal fun <T> XMLEventReader.read(run : ElementReader<T>.() -> T ) : T {
     while (hasNext()) {
         this.nextEvent()!!.run {
             when {
-                isStartDocument -> {
+                isStartElement -> {
                     asStartElement()!!.let {
+                        print(  "e" )
                         stuck.add( StaxElementReader( it.name  , StaxAttributes(it.attribute()) )  )
                     }
                 }
@@ -80,7 +82,7 @@ internal fun <T> XMLEventReader.read(run : ElementReader<T>.() -> T ) : T {
                     }
                 }
                 else -> {
-                    throw Exception()
+
                 }
             }
         }

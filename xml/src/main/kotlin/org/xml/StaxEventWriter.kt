@@ -5,12 +5,13 @@ import javax.xml.namespace.QName
 import javax.xml.stream.XMLEventWriter
 
 class StaxEventDocumentWriter internal constructor( private val writer: XMLEventWriter ,version : String  , encoding : String ) : DocumentWriter {
-    private val bool = true
+    private var bool = true
     init {
         writer.add( EventBluider.createStartDocument(encoding , version ) )
     }
     override fun element(name: String, vararg attributes: Pair<String, String>, children: ElementWriter.() -> Unit) =
         if (bool) {
+            bool = false
             writer.element(name, attributes, children)
         } else throw Exception()
 
@@ -22,8 +23,6 @@ class StaxEventDocumentWriter internal constructor( private val writer: XMLEvent
         flush()
         close()
     }
-
-
 }
 
 class StaxEventElementWriter internal constructor(private val writer: XMLEventWriter) : ElementWriter {

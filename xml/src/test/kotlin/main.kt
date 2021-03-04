@@ -1,11 +1,37 @@
+import org.xml.*
 import org.xml.dom.readXMLDOM
 import java.io.File
 
+
+
 fun main(){
-    val a  = File( "eee.xml").readXMLDOM()
+    File("fff.xml").readXMLStaxEvent  <Any> {
+        println(name)
 
 
 
 
+
+    }
+
+
+/*
+
+    print(writeXMLStaxEvent {
+        element("name"){
+            element("eeee"){
+                +"eeeeee"
+            }
+            element("eeee"){
+                +"eeeeee"
+            }
+        }
+
+
+    })
+
+
+
+*/
 
 }

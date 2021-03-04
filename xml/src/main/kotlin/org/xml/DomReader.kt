@@ -19,17 +19,16 @@ private fun  <T > Element.read(init  : DomElementReader<T>.( ) ->  T   ) : T {
     if (hasChildNodes()){
         childNodes.run{
             for ( i in 0 until length ){
-                list.add( item(i)!!.let {
-                    return when( it.nodeType){
+                list.add( item(i)!!.run {
+                    return@run when( nodeType){
                         Node.ELEMENT_NODE -> {
-                            (it as Element).read(init)
+                            (this as Element ).read(init)
                         }
                         Node.TEXT_NODE -> {
-                            it.textContent!!  as T
+                            textContent!!  as T
                         }
                         else -> throw Exception()
                     }
-
                 })
             }
         }

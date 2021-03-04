@@ -18,11 +18,7 @@ class DomDocumentWrite internal constructor ( private val  document: Document):D
         document.addComment(string)
     }
    override fun element ( name : String , vararg  attributes  :Pair<String , String>   ,  children: ElementWriter.() -> Unit ){
-        if ( bool){
-            document.appendChild( DomElementWriter(document.addElement(name  , attributes ) ).apply {  children() }.element  )
-        }else{
-            throw Exception()
-        }
+       DomElementWriter(document.addElement( name , attributes )).children()
     }
 
     internal val domSource get() = DOMSource(document)
@@ -31,7 +27,7 @@ class DomDocumentWrite internal constructor ( private val  document: Document):D
 
 class DomElementWriter internal constructor(internal val element: Element) : ElementWriter  {
     override fun element(name : String, vararg attributes  : Pair< String, String> , children : ElementWriter.()->Unit   ){
-        element.appendChild( DomElementWriter(element.addElement(name  , attributes ) ).apply {  children() }.element  )
+        DomElementWriter(element.addElement( name , attributes )).children()
     }
     override operator fun  String.unaryPlus(){
         element.appendChild( element.ownerDocument.createTextNode(this))

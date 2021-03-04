@@ -4,9 +4,9 @@ import javax.xml.stream.XMLStreamWriter
 import kotlin.Exception
 
 
-class StaxStreamDocumentWriter internal constructor(private val writer: XMLStreamWriter ,  version :String  , encoding: String ) : DocumentWriter {
+class StaxStreamDocumentWriter internal constructor(private val writer: XMLStreamWriter ,  version :String  = "1.0" , encoding: String  = "utf-8") : DocumentWriter {
     init {
-        writer.writeStartElement(encoding , version)
+        writer.writeStartDocument(encoding , version)
     }
     private var bool = true
     override fun element(name: String, vararg attributes: Pair<String, String>, children: ElementWriter.() -> Unit) =

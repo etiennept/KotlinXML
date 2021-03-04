@@ -4,8 +4,12 @@ import org.xml.dom.XMLBuilder
 import org.xml.dom.readXMLDOM
 import org.xml.sax.InputSource
 import org.xml.stax.XMLInputBuilder
+
+import java.io.File
 import java.io.InputStream
 import java.io.Reader
+import java.nio.charset.Charset
+import kotlin.text.Charsets.UTF_8
 
 interface ElementReader<T> {
     val name: String
@@ -18,24 +22,31 @@ interface Attribute {
 }
 
 
-fun <T : Any> String.domReader(run: ElementReader<T>.() -> T) = XMLBuilder.DocumentBuilder().parse(InputSource(this.reader())).read(run)
-fun <T : Any> String.staxStreamReader(run: ElementReader<T>.() -> T) = XMLInputBuilder.createXMLStreamReader(this.reader()).read(run)
-fun <T : Any> String.staxEventReader(run: ElementReader<T>.() -> T) = XMLInputBuilder.createXMLEventReader(this.reader()).read(run)
+fun <T : Any> String.readXMLDom(run: ElementReader<T>.() -> T) = reader().readXMLDom(run)
+fun <T : Any> String.readXMLStaxStream(run: ElementReader<T>.() -> T) = reader().readXMLStaxStream(run)
+fun <T : Any> String.readXMLStaxEvent(run: ElementReader<T>.() -> T) = reader().readXMLStaxEvent(run)
 
-fun <T : Any> Reader.domReader(run: ElementReader<T>.() -> T) =
+
+fun <T : Any> File.readXMLDom(charset: Charset = UTF_8 , run: ElementReader<T>.() -> T) = reader(charset ).readXMLDom(run)
+fun <T : Any> File.readXMLStaxStream(charset: Charset =UTF_8,run: ElementReader<T>.() -> T) = reader(charset).readXMLStaxStream(run)
+fun <T : Any> File.readXMLStaxEvent(charset: Charset = UTF_8,run: ElementReader<T>.() -> T) = reader(charset).readXMLStaxEvent(run)
+
+
+
+fun <T : Any> Reader.readXMLDom(run: ElementReader<T>.() -> T) =
     XMLBuilder.DocumentBuilder().parse(InputSource(this)).read(run)
 
-fun <T : Any> Reader.staxStreamReader(run: ElementReader<T>.() -> T) =
+fun <T : Any> Reader.readXMLStaxStream(run: ElementReader<T>.() -> T) =
     XMLInputBuilder.createXMLStreamReader(this).read(run)
 
-fun <T : Any> Reader.staxEventReader(run: ElementReader<T>.() -> T) =
+fun <T : Any> Reader.readXMLStaxEvent(run: ElementReader<T>.() -> T) =
     XMLInputBuilder.createXMLEventReader(this).read(run)
 
-fun <T : Any> InputStream.domReader(run: ElementReader<T>.() -> T) =
+fun <T : Any> InputStream.readXMLDom(run: ElementReader<T>.() -> T) =
     XMLBuilder.DocumentBuilder().parse(this)!!.read(run)
 
-fun <T : Any> InputStream.staxStreamReader(run: ElementReader<T>.() -> T) =
+fun <T : Any> InputStream.readXMLStaxStream(run: ElementReader<T>.() -> T) =
     XMLInputBuilder.createXMLStreamReader(this).read(run)
 
-fun <T : Any> InputStream.staxEventReader(run: ElementReader<T>.() -> T) =
+fun <T : Any> InputStream.readXMLStaxEvent(run: ElementReader<T>.() -> T) =
     XMLInputBuilder.createXMLEventReader(this).read(run)
