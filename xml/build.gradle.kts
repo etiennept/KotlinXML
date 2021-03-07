@@ -33,7 +33,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.kotlin"
             artifactId = "org.xml"
-            version = "0.1"
+            version = "0.2"
             versionMapping {
                 usage("java-api") {
                     fromResolutionOf("runtimeClasspath")
@@ -55,14 +55,14 @@ publishing {
                         name.set("The Apache License, Version 2.0")
                         url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                     }
-                }
+                }*/
                 developers {
                     developer {
-                        id.set("johnd")
-                        name.set("John Doe")
-                        email.set("john.doe@example.com")
+                        id.set("etiennept")
+                        name.set("Etienne Pellissiet-Tanon")
+                        email.set("etiennept@gmail.com")
                     }
-                }*/
+                }
                 scm {
                     connection.set("https://github.com/etiennept/KotlinXML.git")
                    /* developerConnection.set("scm:git:ssh://example.com/my-library.git")

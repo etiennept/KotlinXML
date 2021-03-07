@@ -6,8 +6,8 @@ import java.io.File
 
 fun main(){
     File("fff.xml").readXMLStaxEvent  <Any> {
-        println(name)
 
+        File("")
 
 
 
