@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.31"
+    kotlin("jvm") version "1.5.0"
     `maven-publish`
 }
 
@@ -33,7 +33,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "org.kotlin"
             artifactId = "org.xml"
-            version = "0.2"
+            version = "0.3"
             versionMapping {
                 usage("java-api") {
                     fromResolutionOf("runtimeClasspath")

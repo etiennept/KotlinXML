@@ -5,33 +5,28 @@ import java.io.File
 
 
 fun main(){
-    File("fff.xml").readXMLStaxEvent  <Any> {
-
-        File("")
 
 
 
 
-    }
 
-
-/*
-
-    print(writeXMLStaxEvent {
-        element("name"){
-            element("eeee"){
-                +"eeeeee"
+    print(writeXMLDom{
+        element("name"   , "id" to "grand"  ){
+            element("value"){
+                +"hello"
             }
-            element("eeee"){
-                +"eeeeee"
+            element("value"){
+                +"bye bye "
             }
         }
+
+
 
 
     })
 
 
 
-*/
+
 
 }

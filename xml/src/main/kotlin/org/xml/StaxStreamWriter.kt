@@ -5,6 +5,7 @@ import kotlin.Exception
 
 
 class StaxStreamDocumentWriter internal constructor(private val writer: XMLStreamWriter ,  version :String  = "1.0" , encoding: String  = "utf-8") : DocumentWriter {
+
     init {
         writer.writeStartDocument(encoding , version)
     }

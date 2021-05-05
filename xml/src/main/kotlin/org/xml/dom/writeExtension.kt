@@ -10,11 +10,11 @@ import javax.xml.transform.Source
 
 
 
-fun Element.createAttr( attribute:  Pair<String, String>)  = this.ownerDocument!!.createAttribute(attribute.first)!!.apply { value = value }
+fun Element.createAttr( attribute:  Pair<String, String>)  = this.ownerDocument!!.createAttribute(attribute.first)!!.apply { value = attribute.second }
 
 fun Element.appendAttr(attributes:  Array< out Pair<String, String>> ){
     attributes.forEach {
-        setAttributeNode( createAttr( it))
+        setAttributeNode( createAttr( it) )
     }
 }
 private fun Node.addElement( document: Document  ,  name : String , attributes:  Array < out Pair<String, String >> )
