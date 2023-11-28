@@ -5,7 +5,7 @@
  
  ### Gradle 
 
-` implementaation  "org.kotlin:org.xml:0.2" `
+` implementation  "org.kotlin:org.xml:0.2" `
 
 
 Write  
